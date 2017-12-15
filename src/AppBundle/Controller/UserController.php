@@ -13,17 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
     /**
-     * @Route("/admin/index", name="admin_index")
+     * @Route("/", name="homepage")
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        return $this->render('admin/index.html.twig');
+        return $this->render('base.html.twig');
     }
 
     /**
-     * @Route("/register", name="register_page")
+     * @Route("/register", name="register")
      */
     public function registerAction(Request $request)
     {
@@ -36,7 +36,7 @@ class UserController extends Controller
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_ADMIN']);
+            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
             $user->setRoles([$role]);
 
             $em = $this->getDoctrine()->getManager();
