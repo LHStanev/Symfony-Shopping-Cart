@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"user" = "User", "editor" = "Editor", "admin" = "Admin"})
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */

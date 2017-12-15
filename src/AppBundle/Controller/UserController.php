@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Admin;
+use AppBundle\Entity\Editor;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
@@ -27,7 +29,7 @@ class UserController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $user = new User();
+        $user = new Admin();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -36,7 +38,7 @@ class UserController extends Controller
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
+            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_ADMIN']);
             $user->setRoles([$role]);
 
             $em = $this->getDoctrine()->getManager();
