@@ -81,7 +81,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-        $this->setInitialCash(rand(10,100));
+        $this->setSpentMoney(0);
     }
 
     /**
