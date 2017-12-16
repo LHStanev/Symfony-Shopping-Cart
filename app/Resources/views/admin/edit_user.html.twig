@@ -1,0 +1,42 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.username, 'Username: ') }}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.email, 'Email: ') }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+
+            <div class="form-group">
+                {{ form_label(form.initialCash, 'Deposit: ') }}
+                {{ form_widget(form.initialCash, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.spentMoney, 'Money spent: ') }}
+                {{ form_widget(form.spentMoney, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.roles, 'Roles: ') }}
+                {{ form_widget(form.roles, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_widget(form.Save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

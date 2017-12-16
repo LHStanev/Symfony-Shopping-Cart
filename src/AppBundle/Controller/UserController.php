@@ -35,11 +35,23 @@ class UserController extends Controller
 
         if($form->isSubmitted()) {
 
+            // Encode the user password.
+
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
+            //Check if this is the first registration(Admin) and assign a role.
+
+            $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+            if(null != $users) {
+                $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
+            } else {
+                $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_ADMIN']);
+            }
             $user->setRoles([$role]);
+
+            //Add user to DB.
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
