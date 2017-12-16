@@ -54,6 +54,20 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="initial_cash", type="integer")
+     */
+    private $initialCash;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="spent_money", type="integer")
+     */
+    private $spentMoney;
+
+    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
      * @ORM\JoinTable(name="user_roles",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
@@ -67,6 +81,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->setInitialCash(rand(10,100));
     }
 
     /**
@@ -165,6 +180,38 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInitialCash()
+    {
+        return $this->initialCash;
+    }
+
+    /**
+     * @param mixed $initialCash
+     */
+    public function setInitialCash($initialCash)
+    {
+        $this->initialCash = $initialCash;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSpentMoney()
+    {
+        return $this->spentMoney;
+    }
+
+    /**
+     * @param int $spentMoney
+     */
+    public function setSpentMoney($spentMoney)
+    {
+        $this->spentMoney = $spentMoney;
     }
 
 

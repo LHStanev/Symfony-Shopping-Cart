@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $user = new Admin();
+        $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -38,7 +38,7 @@ class UserController extends Controller
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_ADMIN']);
+            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
             $user->setRoles([$role]);
 
             $em = $this->getDoctrine()->getManager();

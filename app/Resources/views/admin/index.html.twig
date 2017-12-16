@@ -1,5 +1,62 @@
 {% extends 'base.html.twig' %}
 
 {% block body  %}
-    <h1>This is the admin panel.</h1>
+    <h3 class="text-center">New Users</h3><span><a class="btn btn-info" href="#">View All</a></span>
+    <table class="table table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Cash (USD)</th>
+        <th>Role</th>
+        <th>Edit</th>
+        <th>Ban</th>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }},
+                    {% endfor %}
+                </td>
+                <td><a href="#">Edit</a></td>
+                <td><a href="#">Ban</a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <br>
+
+    <h3 class="text-center">Latest Products</h3><a class="btn btn-info" href="#">View All</a>
+    <table class="table table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Current Discount</th>
+        <th>Date Added</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        </thead>
+        <tbody>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td><a href="#">Edit</a></td>
+        <td><a href="#">Delete</a></td>
+
+        </tbody>
+    </table>
+    <a class="btn btn-info btn-add" href="#">Add</a>
+
 {% endblock %}
