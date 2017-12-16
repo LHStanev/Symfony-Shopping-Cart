@@ -12,7 +12,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 {
     public function showNewestAction(){
         $em     = $this->getEntityManager();
-        $query  = $em->createQuery("SELECT u FROM AppBundle:User u ORDER BY u.id DESC");
+        $query  = $em->createQuery("SELECT u FROM AppBundle:User u ORDER BY u.id DESC")->setMaxResults(5);
         $result = $query->getResult();
         return $result;
     }

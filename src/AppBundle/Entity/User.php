@@ -68,6 +68,11 @@ class User implements UserInterface, \Serializable
     private $spentMoney;
 
     /**
+     * @var int
+     */
+    private $isBanned;
+
+    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
      * @ORM\JoinTable(name="user_roles",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
