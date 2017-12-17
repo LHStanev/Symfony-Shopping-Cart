@@ -27,8 +27,8 @@ class BookController extends Controller
 
     public function editBookAction(Request $request ,int $id)
     {
-        $user = $this->getDoctrine()->getRepository(Book::class)->find($id);
-        $form = $this->createForm(BookType::class, $user);
+        $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+        $form = $this->createForm(BookType::class, $book);
 
         $form->handleRequest($request);
 
