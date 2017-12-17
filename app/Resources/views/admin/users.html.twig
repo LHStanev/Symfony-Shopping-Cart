@@ -1,0 +1,39 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+    <h3 class="text-center">All Users</h3><span><a class="btn btn-info" href="{{ path('admin_index') }}">Back to Admin panel</a></span>
+    <table class="table table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Cash (USD)</th>
+        <th>Role</th>
+        <th>Edit</th>
+        <th>Ban</th>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.initialCash - user.spentMoney }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }},
+                    {% endfor %}
+                </td>
+                <td><a href="{{ path('edit_user', {id:user.id} )}}">Edit</a></td>
+                <td><a href="{{ path('admin_user_ban', {id:user.id}) }}">{% if user.enabled == true %}
+                            Ban
+                        {% else %}
+                            Unban
+                        {% endif %}
+                    </a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

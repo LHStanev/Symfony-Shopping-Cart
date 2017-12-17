@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block navigation %}
+    {{ parent()  }}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin_index') }}" class="btn btn-primary">To admin panel</a>
+    {% endif %}
+{% endblock %}
