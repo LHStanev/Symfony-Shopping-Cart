@@ -2,16 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Role;
+use AppBundle\Entity\Book;
 use AppBundle\Entity\User;
 use AppBundle\Form\EditUserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -27,9 +22,10 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->showNewestAction();
+        $users = $this->getDoctrine()->getRepository(User::class)->showLastFiveAction();
+        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFiveAction();
 
-        return $this->render('admin/index.html.twig', ['users' => $users]);
+        return $this->render('admin/index.html.twig', ['users' => $users,'books' =>$books]);
     }
 
     /**
@@ -56,9 +52,9 @@ class AdminController extends Controller
      * @Route("/admin/users", name="admin_users")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewUsersAction()
+    public function viewAllUsersAction()
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->showAllAction();
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
         return $this->render('admin/users.html.twig', ['users' => $users]);
     }

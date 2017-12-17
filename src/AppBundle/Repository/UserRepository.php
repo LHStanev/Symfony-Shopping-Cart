@@ -10,16 +10,9 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function showNewestAction(){
+    public function showLastFiveAction(){
         $em     = $this->getEntityManager();
         $query  = $em->createQuery("SELECT u FROM AppBundle:User u ORDER BY u.id DESC")->setMaxResults(5);
-        $result = $query->getResult();
-        return $result;
-    }
-
-    public function showAllAction(){
-        $em     = $this->getEntityManager();
-        $query  = $em->createQuery("SELECT u FROM AppBundle:User u ORDER BY u.id DESC");
         $result = $query->getResult();
         return $result;
     }

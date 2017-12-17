@@ -1,0 +1,30 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+    <h3 class="text-center">All Books</h3><a class="btn btn-info" href="{{ path('admin_index') }}">Back to Admin panel</a></span>
+    <table class="table table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Book</th>
+        <th>Genre</th>
+        <th>Quantity</th>
+        <th>Current Discount</th>
+        <th>Year</th>
+        <th>Edit</th>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.quantity }}</td>
+                <td>current discount</td>
+                <td>{{ book.year }}</td>
+                <td><a href="{{ path('edit_book', {id: book.id}) }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-info btn-right" href="#">Add</a>
+{% endblock %}
