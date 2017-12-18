@@ -148,7 +148,7 @@ class Book
     /**
      * @return string
      */
-    public function getAuthor(): string
+    public function getAuthor(): ?string
     {
         return $this->author;
     }
@@ -164,7 +164,7 @@ class Book
     /**
      * @return int
      */
-    public function getYear(): int
+    public function getYear(): ?int
     {
         return $this->year;
     }
@@ -252,7 +252,7 @@ class Book
     /**
      * @return Genre
      */
-    public function getGenre(): Genre
+    public function getGenre(): ?Genre
     {
         return $this->genre;
     }

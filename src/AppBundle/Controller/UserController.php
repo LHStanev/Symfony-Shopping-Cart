@@ -10,22 +10,16 @@ use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class UserController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     * @param $name
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction()
-    {
-        return $this->render('index.html.twig');
-    }
 
     /**
+     * @param Request $request
      * @Route("/register", name="register")
+     * @return Response
      */
     public function registerAction(Request $request)
     {

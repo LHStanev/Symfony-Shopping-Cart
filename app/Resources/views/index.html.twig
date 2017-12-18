@@ -5,5 +5,7 @@
 
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('admin_index') }}" class="btn btn-primary">To admin panel</a>
+        {% elseif (is_granted('ROLE_EDITOR')) %}
+            <a href="{{ path('editor_index') }}" class="btn btn-primary">To editor's panel</a>
     {% endif %}
 {% endblock %}

@@ -75,6 +75,6 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return $this->redirect($request->server->get('HTTP_REFERER'));;
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 }
