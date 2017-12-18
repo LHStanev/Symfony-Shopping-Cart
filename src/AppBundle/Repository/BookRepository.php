@@ -27,7 +27,7 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
     public function viewByGenre(string $name)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT b.name FROM AppBundle:Book b LEFT JOIN b.genre g WHERE g.name = :name ORDER BY b.id DESC ");
+        $query = $em->createQuery("SELECT b FROM AppBundle:Book b LEFT JOIN b.genre g WHERE g.name = :name ORDER BY b.id DESC ");
         $query->setParameter('name', $name);
         $result = $query->getResult();
 

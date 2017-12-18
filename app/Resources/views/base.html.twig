@@ -64,10 +64,11 @@
                              </div><!-- /.container-fluid -->
                          </nav>
 
-
-
-
-
+                             {% if is_granted('ROLE_ADMIN') and path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) != '/admin/index' %}
+                                 <a href="{{ path('admin_index') }}" class="btn btn-primary">To admin panel</a>
+                             {% elseif (is_granted('ROLE_EDITOR') and path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) != '/editor/index' ) %}
+                                 <a href="{{ path('editor_index') }}" class="btn btn-primary">To editor's panel</a>
+                             {% endif %}
                      {% endblock %}
                      {% block body %}
 

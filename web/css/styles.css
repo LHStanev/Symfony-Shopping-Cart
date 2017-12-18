@@ -5,3 +5,54 @@
 .btn-right {
     float:right;
 }
+
+/*Books*/
+
+.books{
+    margin-top: 25px;
+}
+
+.book {
+    width: 40%;
+    float: left;
+    margin: 2%;
+    padding:2%;
+    border: 1px solid lightblue;
+}
+.book img {
+    width: 90%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.book .left {
+    width: 35%;
+    float: left;
+}
+.book .right {
+    width: 55%;
+    float: left;
+}
+
+.book-one {
+    width: 80%;
+    padding: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 1px solid lightblue;
+    float:left;
+
+}
+.book-one .left {
+    width: 35%;
+    float: left;
+    margin-right: 5%;
+}
+.book-one .right {
+    width: 55%;
+    float: left;
+}
+.book-one img {
+    width: 90%;
+    height: auto;
+    margin-bottom: 10px
+}

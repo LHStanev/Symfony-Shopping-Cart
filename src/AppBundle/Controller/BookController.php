@@ -87,4 +87,16 @@ class BookController extends Controller
 
         return $this->render('book/view_by_genre.html.twig', ['books'=>$books]);
     }
+
+    /**
+     * @Route("book/{id}", name="book_by_id")
+     * @param int $id
+     * @return Response
+     */
+    public function viewOneById(int $id)
+    {
+        $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+
+        return $this->render('book/one_by_id.html.twig', ['book'=>$book]);
+    }
 }

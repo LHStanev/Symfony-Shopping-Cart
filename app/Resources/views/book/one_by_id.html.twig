@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="book-one">
+
+        <div class="left">
+            <img src="{{ asset('img/') ~  book.id ~ ".jpg"}}" alt="image" >
+            <p><strong>Year: </strong> {{ book.year }} </p>
+            <p><strong>Author: </strong> {{ book.author }}</p>
+            <p><strong>Price: </strong> {{ book.price }}</p>
+            <p><strong>Quantity: </strong> {{ book.quantity }}</p>
+        </div>
+        <div class="right">
+            <h4>{{ book.name }}</h4>
+            <p>{{ book.description }}</p>
+            {% if is_granted('ROLE_USER') %}
+                <p><a class="btn btn-primary btn-right" href="">Add to cart</a></p>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}
+
