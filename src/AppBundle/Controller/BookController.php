@@ -4,7 +4,10 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Book;
+use AppBundle\Entity\Review;
+use AppBundle\Entity\User;
 use AppBundle\Form\BookType;
+use AppBundle\Form\ReviewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,13 +95,41 @@ class BookController extends Controller
     /**
      * @Route("book/{id}", name="book_by_id")
      * @param int $id
+     * @param Request $request
      * @return Response
      */
-    public function viewOneByIdAction(int $id)
+    public function viewOneByIdAction(Request $request, int $id)
     {
         $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+        $reviews = $this->getDoctrine()->getRepository(Review::class)->findAllByBookId($id);
 
-        return $this->render('book/one_by_id.html.twig', ['book'=>$book]);
+        $review = new Review();
+
+        if($this->getUser()) {
+            $user = $this->getUser();
+        } else {
+            $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
+        }
+
+        $review->setBook($book);
+        $review->setUser($user);
+
+        $form = $this->createForm(ReviewType::class, $review);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($review);
+            $em->flush();
+
+            return $this->redirect($request->server->get('HTTP_REFERER'));
+        }
+
+        return $this->render('book/one_by_id.html.twig', [
+            'book'=>$book,
+            'form'=>$form->createView(),
+            'reviews'=>$reviews
+        ]);
     }
 
     /**

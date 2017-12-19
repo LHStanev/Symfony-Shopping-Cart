@@ -82,8 +82,15 @@ class User implements AdvancedUserInterface, \Serializable
 
     private $roles;
 
+    /**
+     * @var Review[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="user")
+     */
+    private $reviews;
+
     public function __construct()
     {
+        $this->reviews = new ArrayCollection();
         $this->roles = new ArrayCollection();
         $this->setSpentMoney(0);
         $this->setEnabled(true);
@@ -378,6 +385,11 @@ class User implements AdvancedUserInterface, \Serializable
     public function isEnabled()
     {
         return $this->enabled;
+    }
+
+    public function __toString()
+    {
+       return $this->username;
     }
 }
 

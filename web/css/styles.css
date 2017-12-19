@@ -39,6 +39,7 @@
     padding: 5%;
     margin-left: 15%;
     margin-right: 15%;
+    margin-bottom:5%;
     border: 1px solid darkgray;
     box-shadow: 0px 0px 4px grey;
     float:left;
@@ -60,4 +61,11 @@
 }
 .item:active {
     background: darkgrey;
+}
+
+.review {
+    border: 1px solid darkgray;
+    box-shadow: 0px 0px 4px grey;
+    padding:5%;
+    margin-bottom: 5%;
 }

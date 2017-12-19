@@ -54,7 +54,7 @@
             <tr>
                 <td>{{ book.id }}</td>
                 <td><a href="{{ path('book_by_id', {id: book.id}) }}">{{ book.name }}</a></td>
-                <td>{{ book.genre }}</td>
+                <td><a href="{{ path('books_by_genre', {name: book.genre}) }}">{{ book.genre }}</a></td>
                 <td>{{ book.quantity }}</td>
                 <td>current discount</td>
                 <td>{{ book.year }}</td>

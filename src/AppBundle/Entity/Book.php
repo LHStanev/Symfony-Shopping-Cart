@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -86,6 +87,16 @@ class Book
      */
     private $genre;
 
+    /**
+     * @var Review[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="book")
+     */
+    private $reviews;
+
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -265,5 +276,25 @@ class Book
         $this->genre = $genre;
     }
 
+    /**
+     * @return Review[]|ArrayCollection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param Review[]|ArrayCollection $reviews
+     */
+    public function setReviews($reviews): void
+    {
+        $this->reviews = $reviews;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
 
