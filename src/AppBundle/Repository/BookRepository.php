@@ -10,19 +10,13 @@ namespace AppBundle\Repository;
  */
 class BookRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function showLastFiveAction(){
+    public function showLastFive(){
         $em     = $this->getEntityManager();
         $query  = $em->createQuery("SELECT b FROM AppBundle:Book b ORDER BY b.id DESC")->setMaxResults(5);
         $result = $query->getResult();
         return $result;
     }
 
-    public function showAllAction(){
-        $em     = $this->getEntityManager();
-        $query  = $em->createQuery("SELECT b FROM AppBundle:Book b ORDER BY b.id DESC");
-        $result = $query->getResult();
-        return $result;
-    }
 
     public function viewByGenre(string $name)
     {
@@ -31,6 +25,13 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter('name', $name);
         $result = $query->getResult();
 
+        return $result;
+    }
+
+    public function showLastTen(){
+        $em     = $this->getEntityManager();
+        $query  = $em->createQuery("SELECT b FROM AppBundle:Book b ORDER BY b.id DESC")->setMaxResults(10);
+        $result = $query->getResult();
         return $result;
     }
 }

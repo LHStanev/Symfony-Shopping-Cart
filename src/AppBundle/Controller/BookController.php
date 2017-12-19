@@ -80,8 +80,9 @@ class BookController extends Controller
     /**
      * @Route("genre/{name}", name="books_by_genre")
      * @param string $name
+     * @return Response
      */
-    public function viewByGenre(string $name)
+    public function viewByGenreAction(string $name)
     {
         $books = $this->getDoctrine()->getRepository(Book::class)->viewByGenre($name);
 
@@ -93,10 +94,21 @@ class BookController extends Controller
      * @param int $id
      * @return Response
      */
-    public function viewOneById(int $id)
+    public function viewOneByIdAction(int $id)
     {
         $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
 
         return $this->render('book/one_by_id.html.twig', ['book'=>$book]);
+    }
+
+    /**
+     * @Route("/latest_books", name="latest_books")
+     * @return Response
+     */
+    public function showLatestBooksAction()
+    {
+        $books = $this->getDoctrine()->getRepository(Book::class)->showLastTen();
+
+        return $this->render('book/view_last_ten.html.twig', ['books'=>$books]);
     }
 }

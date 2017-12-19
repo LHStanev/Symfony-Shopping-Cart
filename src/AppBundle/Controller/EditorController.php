@@ -14,7 +14,7 @@ class EditorController extends Controller
      */
     public function indexAction()
     {
-        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFiveAction();
+        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFive();
 
         return $this->render('editor/index.html.twig', ['books' =>$books]);
     }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Book;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -13,6 +14,7 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('index.html.twig');
+        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFive();
+        return $this->render('index.html.twig', ['books' => $books]);
     }
 }

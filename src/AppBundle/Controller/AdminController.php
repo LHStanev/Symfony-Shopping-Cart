@@ -22,8 +22,8 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->showLastFiveAction();
-        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFiveAction();
+        $users = $this->getDoctrine()->getRepository(User::class)->showLastFive();
+        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFive();
 
         return $this->render('admin/index.html.twig', ['users' => $users,'books' =>$books]);
     }

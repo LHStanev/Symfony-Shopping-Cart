@@ -13,8 +13,10 @@
         <div class="right">
             <h4>{{ book.name }}</h4>
             <p>{{ book.description }}</p>
-            {% if is_granted('ROLE_USER') %}
-                <p><a class="btn btn-primary btn-right" href="">Add to cart</a></p>
+            {% if  is_granted('ROLE_EDITOR') or is_granted('ROLE_ADMIN') %}
+                <p><a class="btn btn-primary btn-right" href="{{ path('edit_book', {id: book.id}) }}">Edit</a></p>
+                {% elseif is_granted('ROLE_USER') %}
+                    <p><a class="btn btn-primary btn-right" href="">Add to cart</a></p>
             {% endif %}
         </div>
 
