@@ -69,3 +69,13 @@
     padding:5%;
     margin-bottom: 5%;
 }
+
+.book-cart {
+    float: left;
+    width: 15%;
+    margin: 5%;
+}
+.book-cart img {
+    width:80%;
+    padding: 2%;
+}

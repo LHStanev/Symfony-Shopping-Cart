@@ -3,21 +3,23 @@
 {% block body %}
     <div class="books">
         {% for book in books %}
-            <div class="book">
+            {% if book.quantity > 0 %}
+                <div class="book">
 
-                <div class="left">
-                    <a href="{{ path('book_by_id', {id: book.id}) }}"><img src="{{ asset('img/') ~  book.id ~ ".jpg"}}" alt="image" ></a>
-                    <p><strong>Year: </strong> {{ book.year }} </p>
-                    <p><strong>Author: </strong> {{ book.author }}</p>
-                    <p><strong>Price: </strong> {{ book.price }}</p>
-                    <p><strong>Quantity: </strong> {{ book.quantity }}</p>
-                </div>
-                <div class="right">
-                    <a href="{{ path('book_by_id', {id: book.id}) }}"><h4>{{ book.name }}</h4></a>
-                    <p>{{ book.description|length > 250 ? book.description|slice(0, 250) ~ '...' : book.description  }}</p>
-                </div>
+                    <div class="left">
+                        <a href="{{ path('book_by_id', {id: book.id}) }}"><img src="{{ asset('img/') ~  book.id ~ ".jpg"}}" alt="image" ></a>
+                        <p><strong>Year: </strong> {{ book.year }} </p>
+                        <p><strong>Author: </strong> {{ book.author }}</p>
+                        <p><strong>Price: </strong> {{ book.price }}</p>
+                        <p><strong>Quantity: </strong> {{ book.quantity }}</p>
+                    </div>
+                    <div class="right">
+                        <a href="{{ path('book_by_id', {id: book.id}) }}"><h4>{{ book.name }}</h4></a>
+                        <p>{{ book.description|length > 250 ? book.description|slice(0, 250) ~ '...' : book.description  }}</p>
+                    </div>
 
-            </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

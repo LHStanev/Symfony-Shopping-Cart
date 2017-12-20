@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Your cart</h1>
+    <div class="books">
+         {% if orders %}
+        {% for order in orders %}
+            <div class="book-cart text-center">
+                <a href="{{ path('book_by_id', {id: order.id}) }}"><img src="{{ asset('img/') ~  order.id ~ ".jpg"}}" alt="image" ></a>
+                <p><strong> {{ order.name }}</strong> </p>
+            </div>
+        {% endfor %}
+        {% else %}
+        <p>Your cart is empty.</p>
+        {% endif %}
+    </div>
+   <div>
+       <a class="btn btn-primary btn-right" href="{{ path('cart_transaction') }}">Checkout</a>
+   </div>
+
+{% endblock %}
