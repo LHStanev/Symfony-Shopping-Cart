@@ -14,7 +14,8 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFive();
+        $books = $this->getDoctrine()->getRepository(Book::class)->showBestsellers();
+
         return $this->render('index.html.twig', ['books' => $books]);
     }
 }

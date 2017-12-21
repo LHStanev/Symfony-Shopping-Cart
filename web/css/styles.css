@@ -83,3 +83,15 @@
     width:80%;
     padding: 2%;
 }
+#carousel-example-generic {
+    max-height: 350px;
+}
+#carousel-example-generic img {
+    height:320px;
+    padding-left: 30%;
+}
+#carousel-example-generic a {
+    font-size: 1em;
+    color: #fff;
+    background:black
+}

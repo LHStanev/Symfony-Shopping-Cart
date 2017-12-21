@@ -15,7 +15,7 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
-#    AppBundle\Services\FileUploader:
+#    AppBundle\Service\FileUploader:
 #        arguments: ['%images_dir%']
 
     # makes classes in src/AppBundle available to be used as services

@@ -20,17 +20,30 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
 
     public function viewByGenre(string $name)
     {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT b FROM AppBundle:Book b LEFT JOIN b.genre g WHERE g.name = :name ORDER BY b.id DESC ");
+        $em      = $this->getEntityManager();
+        $query   = $em->createQuery("SELECT b FROM AppBundle:Book b LEFT JOIN b.genre g WHERE g.name = :name ORDER BY b.id DESC ");
         $query->setParameter('name', $name);
-        $result = $query->getResult();
+        $result  = $query->getResult();
 
         return $result;
     }
 
-    public function showLastTen(){
+    public function showLastTen()
+    {
         $em     = $this->getEntityManager();
         $query  = $em->createQuery("SELECT b FROM AppBundle:Book b ORDER BY b.id DESC")->setMaxResults(10);
+        $result = $query->getResult();
+        return $result;
+    }
+
+    public function showBestsellers()
+    {
+        $em     = $this->getEntityManager();
+        $query  = $em->createQuery("SELECT p.id, p.name, COUNT (p.id) sales
+                                            FROM AppBundle:Book p
+                                              INNER JOIN p.buyersComplete b
+                                               GROUP BY p.name 
+                                                ORDER BY sales DESC ")->setMaxResults(5);
         $result = $query->getResult();
         return $result;
     }
