@@ -28,4 +28,27 @@
     </table>
     <a class="btn btn-info btn-right" href="{{ path('add_book') }}">Add</a>
 
+    <br>
+
+    <h3 class="text-center">Book genres</h3>
+    <table class="table table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        </thead>
+        <tbody>
+        {% for genre in genres %}
+            <tr>
+                <td>{{ genre.id }}</td>
+                <td>{{ genre.name }}</td>
+                <td><a href="{{ path('edit_genre', {id: genre.id }) }}">Edit</a></td>
+                <td><a href="{{ path('delete_genre', {id: genre.id }) }}">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-info btn-right" href="{{ path('add_genre') }}">Add</a>
+
 {% endblock %}

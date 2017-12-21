@@ -77,4 +77,18 @@ class AdminController extends Controller
 
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
+
+    /**
+     * @Route("/admin/users/delete/{id}", name="delete_user")
+     * @param int $id
+     */
+    public function deleteAction( int $id)
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_index');
+    }
 }

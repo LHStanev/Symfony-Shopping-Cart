@@ -19,6 +19,8 @@
     padding:2%;
     border: 1px solid darkgray;
     box-shadow: 0px 0px 4px grey;
+    height: 350px;
+    overflow: hidden;
 }
 .book img {
     width: 90%;

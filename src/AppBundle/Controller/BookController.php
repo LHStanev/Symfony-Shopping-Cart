@@ -69,7 +69,7 @@ class BookController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($book);
             $em->flush();

@@ -11,6 +11,7 @@
         <th>Role</th>
         <th>Edit</th>
         <th>Ban/Unban</th>
+        <th>Delete</th>
         </thead>
         <tbody>
         {% for user in users %}
@@ -31,6 +32,7 @@
                                                                            Unban
                                                                          {% endif %}
             </a></td>
+                <td><a href="{{ path('delete_user', {id: user.id}) }}">Delete</a></td>
             </tr>
         {% endfor %}
 

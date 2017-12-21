@@ -24,9 +24,11 @@ class CartController extends Controller
         /**@var $user User */
         $user = $this->getUser();
         $orders = $user->getOrders();
+        $balance = $this->getUser()->getBalance();
 
         return $this->render('cart/index.html.twig', [
-            'orders' => $orders
+            'orders' => $orders,
+            'balance' => $balance
         ]);
     }
 
@@ -36,12 +38,18 @@ class CartController extends Controller
      */
     public function addOrderAction(int $id)
     {
+        $orders = $this->getUser()->getOrders();
+
         $order = $this->getDoctrine()->getRepository(Book::class)->find($id);
-        $user = $this->getUser();
-        $user->addOrder($order);
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
-        return $this->redirectToRoute('index_cart');
+        if($orders->contains($order)){
+           return $this->render('errorPage.html.twig', ['error' => 'This product is already in your cart.']);
+        } else {
+            $user = $this->getUser();
+            $user->addOrder($order);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('index_cart');
+        }
     }
 
     /**
