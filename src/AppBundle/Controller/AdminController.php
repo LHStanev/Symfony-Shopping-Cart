@@ -8,6 +8,7 @@ use AppBundle\Form\EditUserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AdminController
@@ -29,7 +30,10 @@ class AdminController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param int $id
      * @Route("admin/users/edit/{id}", name="edit_user")
+     * @return Response
      */
     public function editUserAction(Request $request ,int $id)
     {
@@ -50,7 +54,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/users", name="admin_users")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function viewAllUsersAction()
     {
@@ -61,7 +65,9 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/users/ban/{id}", name="admin_user_ban")
+     * @param Request $request
      * @param int $id
+     * @return Response
      */
     public function banUserAction(Request $request ,int $id) {
 
@@ -81,6 +87,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/users/delete/{id}", name="delete_user")
      * @param int $id
+     * @return Response
      */
     public function deleteAction( int $id)
     {

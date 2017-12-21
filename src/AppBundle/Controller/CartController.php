@@ -3,12 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Book;
-use AppBundle\Entity\Cart;
 use AppBundle\Entity\User;
-use AppBundle\Form\CartType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
@@ -17,6 +16,7 @@ class CartController extends Controller
     /**
      * @Route("/cart", name="index_cart")
      * @param Request $request
+     * @return Response
      */
     public function indexAction(Request $request)
     {
@@ -37,6 +37,7 @@ class CartController extends Controller
     /**
      * @Route("/cart/add/{id}", name="add_order")
      * @param int $id
+     * @return Response
      */
     public function addOrderAction(int $id)
     {
@@ -56,9 +57,12 @@ class CartController extends Controller
 
     /**
      * @Route("/cart/transaction", name="cart_transaction")
+     * @return Response
      */
     public function cartTransactionAction()
     {
+        /** @var Book|ArrayCollection $orders */
+
         $orders = $this->getUser()->getOrders();
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();

@@ -26,22 +26,22 @@ class Book
 
     /**
      * @var string
-     * @
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Please, enter a book title.")
      */
     private $name;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank(message="Please, enter a book description.")
      */
     private $description;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="author", type="string", length=255)
+     * @Assert\NotBlank(message="Please, enter a book author.")
      */
     private $author;
 
@@ -59,23 +59,23 @@ class Book
 
     /**
      * @var string
-     *
      * @ORM\Column(name="price", type="decimal", precision=11, scale=2)
+     * @Assert\NotBlank(message="Please, enter a price.")
      */
 
     private $price;
 
     /**
      * @var int
-     *
      * @ORM\Column(name="quantity", type="integer")
+     * @Assert\NotBlank(message="Please, enter quantity.")
      */
     private $quantity;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="image", type="string", length=255)
+     * @Assert\NotBlank(message="Please, add an image.")
      */
     private $image;
 
@@ -108,8 +108,8 @@ class Book
     public function __construct()
     {
         $this->buyersComplete = new ArrayCollection();
-        $this->buyers = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
+        $this->buyers         = new ArrayCollection();
+        $this->reviews        = new ArrayCollection();
     }
 
     /**
@@ -301,7 +301,7 @@ class Book
     /**
      * @param Review[]|ArrayCollection $reviews
      */
-    public function setReviews($reviews): void
+    public function setReviews($reviews)
     {
         $this->reviews = $reviews;
     }

@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -33,20 +33,20 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Please, enter an email.")
      */
     private $email;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Please, add your password.")
      */
     private $plainPassword;
 
