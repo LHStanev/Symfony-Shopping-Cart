@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Book;
+use AppBundle\Entity\Promotion;
 use AppBundle\Entity\Review;
 use AppBundle\Entity\User;
 use AppBundle\Form\BookType;
@@ -101,6 +102,13 @@ class BookController extends Controller
     public function viewOneByIdAction(Request $request, int $id)
     {
         $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+        $discount = $this->checkForPromotions($id);
+        if(null != $discount) {
+            $discountPrice = $book->getPrice()- ($book->getPrice() * ($discount / 100) );
+            $book->setDiscountPrice($discountPrice);
+        }
+
+
         $reviews = $this->getDoctrine()->getRepository(Review::class)->findAllByBookId($id);
 
         $review = new Review();
@@ -141,5 +149,19 @@ class BookController extends Controller
         $books = $this->getDoctrine()->getRepository(Book::class)->showLastTen();
 
         return $this->render('book/view_last_ten.html.twig', ['books'=>$books]);
+    }
+
+    public function checkForPromotions(int $id)
+    {
+        $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+        $genre = $book->getGenre();
+        $promotions = $this->getDoctrine()->getRepository(Promotion::class)->checkGenrePromotion($genre);
+        if(!empty($promotions)) {
+            foreach($promotions as $promotion) {
+                $discount = $promotion->getDiscount();
+            }
+            return $discount;
+        }
+        return null;
     }
 }

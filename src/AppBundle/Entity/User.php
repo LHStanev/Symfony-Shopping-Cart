@@ -51,16 +51,15 @@ class User implements AdvancedUserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="initial_cash", type="integer")
+     * @var string
+     * @ORM\Column(name="initial_cash", type="decimal", precision=11, scale=2)
      */
     private $initialCash;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="spent_money", type="integer")
+     * @ORM\Column(name="spent_money", type="decimal", precision=11, scale=2)
      */
     private $spentMoney;
 

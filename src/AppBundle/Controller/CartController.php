@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Book;
+use AppBundle\Entity\Promotion;
 use AppBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,6 +25,13 @@ class CartController extends Controller
         /**@var $user User */
         $user = $this->getUser();
         $orders = $user->getOrders();
+        foreach($orders as $order) {
+            $id = $order->getId();
+            $discount = $this->checkForPromotions($id);
+            if(null != $discount) {
+                $order->setDiscountPrice($order->getPrice()- ($order->getPrice() * ($discount / 100) ));
+            }
+        }
         $purchases = $user->getPurchases();
         $balance = $this->getUser()->getBalance();
 
@@ -72,7 +80,14 @@ class CartController extends Controller
 
             if(intval($order->getPrice()) < $balance) {
                 $order->reduceQuantity(1);
-                $user->decreaseBalance($order->getPrice());
+                $discount = $this->checkForPromotions($order->getId());
+                if(null != $discount) {
+                    $discountPrice = $order->getPrice()- ($order->getPrice() * ($discount / 100) );
+                    $user->decreaseBalance($discountPrice);
+                } else {
+                    $user->decreaseBalance($order->getPrice());
+                }
+
                 $orders->removeElement($order);
                 $user->addPurchase($order);
                 $em->flush();
@@ -82,5 +97,19 @@ class CartController extends Controller
         }
         $purchases = $user->getPurchases();
         return $this->redirectToRoute('index_cart', ['purchases' => $purchases]);
+    }
+
+    public function checkForPromotions(int $id)
+    {
+        $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+        $genre = $book->getGenre();
+        $promotions = $this->getDoctrine()->getRepository(Promotion::class)->checkGenrePromotion($genre);
+        if(!empty($promotions)) {
+            foreach($promotions as $promotion) {
+                $discount = $promotion->getDiscount();
+            }
+            return $discount;
+        }
+        return null;
     }
 }

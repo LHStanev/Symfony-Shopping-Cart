@@ -9,8 +9,13 @@
                <img src="{{ asset('img/') ~  book.id ~ ".jpg"}}" alt="image" >
                <p><strong>Year: </strong> {{ book.year }} </p>
                <p><strong>Author: </strong> {{ book.author }}</p>
-               <p><strong>Price: </strong> {{ book.price }}</p>
                <p><strong>Quantity: </strong> {{ book.quantity }}</p>
+               {% if book.discountPrice != null %}
+                    <p class="color-red"><strong>Normal price: </strong> {{ book.price }}</p>
+                    <p class="color-green"><strong>Discount price now: </strong> {{ book.discountPrice }}</p>
+               {% else %}
+                   <p><strong>Price: </strong> {{ book.price }}</p>
+               {% endif %}
            </div>
            <div class="right">
                <h4>{{ book.name }}</h4>

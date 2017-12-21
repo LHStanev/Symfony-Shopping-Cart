@@ -66,6 +66,13 @@ class Book
     private $price;
 
     /**
+     * @var string
+     *
+     */
+
+    private $discountPrice = null;
+
+    /**
      * @var int
      * @ORM\Column(name="quantity", type="integer")
      * @Assert\NotBlank(message="Please, enter quantity.")
@@ -346,6 +353,22 @@ class Book
     public function setBuyersComplete($buyersComplete): void
     {
         $this->buyersComplete = $buyersComplete;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscountPrice()
+    {
+        return $this->discountPrice;
+    }
+
+    /**
+     * @param string $discountPrice
+     */
+    public function setDiscountPrice(string $discountPrice)
+    {
+        $this->discountPrice = $discountPrice;
     }
 
 }

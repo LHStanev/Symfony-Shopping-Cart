@@ -36,10 +36,17 @@ class Genre
      */
     private $books;
 
+    /**
+     * @var Promotion[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Promotion",mappedBy="genre")
+     */
+    private $promotions;
+
 
     public function __construct()
     {
-        $this->books = new ArrayCollection();
+        $this->promotions   = new ArrayCollection();
+        $this->books        = new ArrayCollection();
     }
 
     /**
