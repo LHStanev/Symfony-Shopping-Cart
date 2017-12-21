@@ -99,8 +99,15 @@ class Book
      */
     private $buyers;
 
+    /**
+     * @var User[]|ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="purchases")
+     */
+    private $buyersComplete;
+
     public function __construct()
     {
+        $this->buyersComplete = new ArrayCollection();
         $this->buyers = new ArrayCollection();
         $this->reviews = new ArrayCollection();
     }
@@ -323,6 +330,22 @@ class Book
     public function reduceQuantity(int $amount) : void
     {
         $this->quantity = $this->quantity - $amount;
+    }
+
+    /**
+     * @return User[]|ArrayCollection
+     */
+    public function getBuyersComplete()
+    {
+        return $this->buyersComplete;
+    }
+
+    /**
+     * @param User[]|ArrayCollection $buyersComplete
+     */
+    public function setBuyersComplete($buyersComplete): void
+    {
+        $this->buyersComplete = $buyersComplete;
     }
 
 }

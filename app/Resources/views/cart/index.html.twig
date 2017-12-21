@@ -1,23 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Your cart</h1>
-    <h4>Your balance is: {{ balance }} USD</h4>
-    <div class="books">
-         {% if orders %}
-        {% for order in orders %}
-            <div class="book-cart text-center">
-                <a href="{{ path('book_by_id', {id: order.id}) }}"><img src="{{ asset('img/') ~  order.id ~ ".jpg"}}" alt="image" ></a>
-                <p><strong> {{ order.name }}</strong> </p>
-                <p><strong>Price:</strong> {{ order.price }} </p>
+    <div class="row">
+
+            <h1>Your cart</h1>
+            <h4>Your balance is: {{ balance }} USD</h4>
+            <div class="books">
+                {% if orders is not empty  %}
+                    <p>Your orders.</p>
+                    {% for order in orders %}
+                        <div class="book-cart text-center">
+                            <a href="{{ path('book_by_id', {id: order.id}) }}"><img src="{{ asset('img/') ~  order.id ~ ".jpg"}}" alt="image" ></a>
+                            <p><strong> {{ order.name }}</strong> </p>
+                            <p><strong>Price:</strong> {{ order.price }} </p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h4>Your cart is empty.</h4>
+                {% endif %}
             </div>
-        {% endfor %}
-        {% else %}
-        <p>Your cart is empty.</p>
-        {% endif %}
+            <div>
+        </div>
     </div>
-   <div>
-       <a class="btn btn-primary btn-right" href="{{ path('cart_transaction') }}">Checkout</a>
-   </div>
+
+    <div class="row">
+        <div class="books">
+            {% if purchases is not empty  %}
+                <p>Your purchases.</p>
+                {% for purchase in purchases %}
+                    <div class="book-cart text-center">
+                        <a href="{{ path('book_by_id', {id: purchase.id}) }}"><img src="{{ asset('img/') ~  purchase.id ~ ".jpg"}}" alt="image" ></a>
+                        <p><strong> {{ purchase.name }}</strong> </p>
+                        <p><strong>Price:</strong> {{ purchase.price }} </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h4>You don't have any purchases yet.</h4>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="row">
+        <div>
+            <a class="btn btn-primary btn-right" href="{{ path('cart_transaction') }}">Checkout</a>
+        </div>
+    </div>
 
 {% endblock %}

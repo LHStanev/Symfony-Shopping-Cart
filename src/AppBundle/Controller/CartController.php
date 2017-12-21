@@ -24,11 +24,13 @@ class CartController extends Controller
         /**@var $user User */
         $user = $this->getUser();
         $orders = $user->getOrders();
+        $purchases = $user->getPurchases();
         $balance = $this->getUser()->getBalance();
 
         return $this->render('cart/index.html.twig', [
             'orders' => $orders,
-            'balance' => $balance
+            'balance' => $balance,
+            'purchases' => $purchases
         ]);
     }
 
@@ -68,11 +70,13 @@ class CartController extends Controller
                 $order->reduceQuantity(1);
                 $user->decreaseBalance($order->getPrice());
                 $orders->removeElement($order);
+                $user->addPurchase($order);
                 $em->flush();
             }else {
                 $this->addFlash('error', 'Insufficient funds!');
             }
         }
-        return $this->redirectToRoute('index_cart');
+        $purchases = $user->getPurchases();
+        return $this->redirectToRoute('index_cart', ['purchases' => $purchases]);
     }
 }

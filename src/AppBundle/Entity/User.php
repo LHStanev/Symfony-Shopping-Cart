@@ -90,6 +90,13 @@ class User implements AdvancedUserInterface, \Serializable
     private $orders;
 
     /**
+     * @var Book[]|ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Book", inversedBy="buyersComplete")
+     * @ORM\JoinTable(name="user_purchases", joinColumns={@ORM\JoinColumn(name="user_id",referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id")})
+     */
+    private $purchases;
+
+    /**
      * @var Review[]|ArrayCollection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="user")
      */
@@ -97,6 +104,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function __construct()
     {
+        $this->purchases = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->roles = new ArrayCollection();
@@ -445,6 +453,27 @@ class User implements AdvancedUserInterface, \Serializable
     public function decreaseBalance(int $amount)
     {
         $this->spentMoney = $this->spentMoney + $amount;
+    }
+
+    /**
+     * @return Book[]|ArrayCollection
+     */
+    public function getPurchases()
+    {
+        return $this->purchases;
+    }
+
+    /**
+     * @param Book[]|ArrayCollection $purchases
+     */
+    public function setPurchases($purchases)
+    {
+        $this->purchases = $purchases;
+    }
+
+    public function addPurchase(Book $purchase)
+    {
+        $this->getPurchases()->add($purchase);
     }
 
 }
