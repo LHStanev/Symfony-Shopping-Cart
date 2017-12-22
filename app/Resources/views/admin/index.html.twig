@@ -47,8 +47,6 @@
         <th>Book</th>
         <th>Genre</th>
         <th>Quantity</th>
-        <th>Current Discount</th>
-        <th>Year</th>
         <th>Edit</th>
         </thead>
         <tbody>
@@ -58,13 +56,38 @@
                 <td><a href="{{ path('book_by_id', {id: book.id}) }}">{{ book.name }}</a></td>
                 <td><a href="{{ path('books_by_genre', {name: book.genre}) }}">{{ book.genre }}</a></td>
                 <td>{{ book.quantity }}</td>
-                <td>current discount</td>
-                <td>{{ book.year }}</td>
                 <td><a href="{{ path('edit_book', {id: book.id}) }}">Edit</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <a class="btn btn-info btn-right" href="{{ path('add_book') }}">Add</a>
+
+    <br>
+
+    <h3 class="text-center">Latest Promotions</h3><a class="btn btn-info" href="{{ path('promotions_all') }}">View All</a>
+    <table class="table table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Discount</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Genre</th>
+        <th>Edit</th>
+        </thead>
+        <tbody>
+        {% for promotion in promotions %}
+            <tr>
+                <td>{{ promotion.id }}</td>
+                <td>{{ promotion.discount }}</td>
+                <td>{{ promotion.startDate|date('m-d-Y') }}</td>
+                <td>{{ promotion.endDate|date('m-d-Y')}}</td>
+                <td>{{ promotion.genre }}</td>
+                <td><a href="{{ path('edit_promotion', {id: promotion.id}) }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-info btn-right" href="{{ path('add_promotion') }}">Add</a>
 
 {% endblock %}

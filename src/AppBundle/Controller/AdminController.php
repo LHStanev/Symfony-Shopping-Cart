@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Book;
+use AppBundle\Entity\Promotion;
 use AppBundle\Entity\User;
 use AppBundle\Form\EditUserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,10 +24,14 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->showLastFive();
-        $books = $this->getDoctrine()->getRepository(Book::class)->showLastFive();
+        $users      = $this->getDoctrine()->getRepository(User::class)->showLastFive();
+        $books      = $this->getDoctrine()->getRepository(Book::class)->showLastFive();
+        $promotions = $this->getDoctrine()->getRepository(Promotion::class)->showLastFive();
 
-        return $this->render('admin/index.html.twig', ['users' => $users,'books' =>$books]);
+        return $this->render('admin/index.html.twig', [
+            'users' => $users,
+            'books' =>$books,
+            'promotions' => $promotions]);
     }
 
     /**

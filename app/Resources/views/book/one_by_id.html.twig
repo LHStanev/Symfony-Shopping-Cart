@@ -11,10 +11,10 @@
                <p><strong>Author: </strong> {{ book.author }}</p>
                <p><strong>Quantity: </strong> {{ book.quantity }}</p>
                {% if book.discountPrice != null %}
-                    <p class="color-red"><strong>Normal price: </strong> {{ book.price }}</p>
-                    <p class="color-green"><strong>Discount price now: </strong> {{ book.discountPrice }}</p>
+                    <p class="color-red"><strong>Normal price: </strong> {{ book.price|number_format(2, '.', ',') }}</p>
+                    <p class="color-green"><strong>Discount price now: </strong> {{ book.discountPrice|number_format(2, '.', ',') }}</p>
                {% else %}
-                   <p><strong>Price: </strong> {{ book.price }}</p>
+                   <p><strong>Price: </strong> {{ book.price|number_format(2, '.', ',') }}</p>
                {% endif %}
            </div>
            <div class="right">

@@ -8,7 +8,6 @@
         <th>Book</th>
         <th>Genre</th>
         <th>Quantity</th>
-        <th>Current Discount</th>
         <th>Year</th>
         <th>Edit</th>
         </thead>
@@ -19,7 +18,6 @@
                 <td><a href="{{ path('book_by_id', {id: book.id}) }}">{{ book.name }}</a></td>
                 <td><a href="{{ path('books_by_genre', {name: book.genre}) }}">{{ book.genre }}</a></td>
                 <td>{{ book.quantity }}</td>
-                <td>current discount</td>
                 <td>{{ book.year }}</td>
                 <td><a href="{{ path('edit_book', {id: book.id}) }}">Edit</a></td>
             </tr>

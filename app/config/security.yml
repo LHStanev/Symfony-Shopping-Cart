@@ -39,3 +39,4 @@ security:
             - { path: ^/editor, roles: ROLE_EDITOR}
             - { path: ^/genres, roles: ROLE_EDITOR}
             - { path: ^/cart, roles: ROLE_USER}
+            - { path: ^promotions, roles: ROLE_ADMIN}

@@ -114,7 +114,7 @@ class Promotion
     /**
      * @return Genre
      */
-    public function getGenre(): Genre
+    public function getGenre()
     {
         return $this->genre;
     }
@@ -122,7 +122,7 @@ class Promotion
     /**
      * @param Genre $genre
      */
-    public function setGenre(Genre $genre): void
+    public function setGenre(Genre $genre)
     {
         $this->genre = $genre;
     }
@@ -130,7 +130,7 @@ class Promotion
     /**
      * @return int
      */
-    public function getDiscount(): int
+    public function getDiscount(): ?int
     {
         return $this->discount;
     }
@@ -138,7 +138,7 @@ class Promotion
     /**
      * @param int $discount
      */
-    public function setDiscount(int $discount): void
+    public function setDiscount(int $discount)
     {
         $this->discount = $discount;
     }

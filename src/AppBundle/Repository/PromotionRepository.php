@@ -27,4 +27,11 @@ class PromotionRepository extends \Doctrine\ORM\EntityRepository
 
         return $result;
     }
+
+    public function showLastFive(){
+        $em     = $this->getEntityManager();
+        $query  = $em->createQuery("SELECT p FROM AppBundle:Promotion p ORDER BY p.id DESC")->setMaxResults(5);
+        $result = $query->getResult();
+        return $result;
+    }
 }
